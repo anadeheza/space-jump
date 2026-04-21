@@ -87,8 +87,8 @@ function resize() {
 }
 
 window.addEventListener('keydown', e => {
-    if(e.key === "ArrowLeft" || e.key === "A") player.vx = -7;
-    if(e.key === "ArrowRight" || e.key === "D") player.vx = 7;
+    if(e.key === "ArrowLeft" || e.key === "a") player.vx = -7;
+    if(e.key === "ArrowRight" || e.key === "d") player.vx = 7;
 });
 
 window.addEventListener('keyup', () => player.vx = 0);
