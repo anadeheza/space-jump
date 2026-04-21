@@ -87,8 +87,8 @@ function resize() {
 }
 
 window.addEventListener('keydown', e => {
-    if(e.key === "ArrowLeft") player.vx = -7;
-    if(e.key === "ArrowRight") player.vx = 7;
+    if(e.key === "ArrowLeft" || e.key === "A") player.vx = -7;
+    if(e.key === "ArrowRight" || e.key === "D") player.vx = 7;
 });
 
 window.addEventListener('keyup', () => player.vx = 0);
@@ -145,26 +145,25 @@ function update() {
 
     platforms = platforms.filter(p => p.y - cameraY < canvas.height + 100);
 
-// 2. If we have fewer platforms than our target count, spawn a new one at the top
-while (platforms.length < platformCount) {
-    let highestPlatY = Math.min(...platforms.map(p => p.y));
-    
-    let jumpHeight = (Math.pow(player.jumpForce, 2) / (2 * gravity));
-    let platDist = 100 + Math.random() * (jumpHeight - 120);
+    while (platforms.length < platformCount) {
+        let highestPlatY = Math.min(...platforms.map(p => p.y));
+        
+        let jumpHeight = (Math.pow(player.jumpForce, 2) / (2 * gravity));
+        let platDist = 100 + Math.random() * (jumpHeight - 120);
 
-    platforms.push({
-        x: Math.random() * (GAME_WIDTH - 100),
-        y: highestPlatY - platDist,
-        w: 100,
-        h: 20,
-        type: Math.random() > 0.8 ? "breaking" : "normal",
-        hasBooster: Math.random() > 0.9,
-        active: true
-    });
-    
-    score++;
-    scoreElement.innerText = score;
-}
+        platforms.push({
+            x: Math.random() * (GAME_WIDTH - 100),
+            y: highestPlatY - platDist,
+            w: 100,
+            h: 20,
+            type: Math.random() > 0.8 ? "breaking" : "normal",
+            hasBooster: Math.random() > 0.9,
+            active: true
+        });
+        
+        score++;
+        scoreElement.innerText = score;
+    }
     platforms.forEach(p => {
         if(!p.active) return;
 
